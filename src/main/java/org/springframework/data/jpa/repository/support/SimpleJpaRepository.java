@@ -833,7 +833,7 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
 
 		Root<S> root = applySpecificationToCriteria(spec, domainClass, query);
 
-		if (query.isDistinct()) {
+		if (query.isDistinct() || query.getGroupList().size() > 0) {
 			query.select(builder.countDistinct(root));
 		} else {
 			query.select(builder.count(root));
